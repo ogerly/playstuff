@@ -12,13 +12,13 @@ window.addEventListener('scroll', function() {
     // Berechnung der Rotationswinkel basierend auf dem Scroll-Prozentsatz
     const maxAngle = 90; // Maximale Rotation in Grad
 
-    // Café dreht sich von 0deg bis maxAngle nach vorne (nach unten klappen)
+    // Café dreht sich von 0deg bis maxAngle nach vorne (in den Raum hinein)
     const cafeAngle = scrollPercent * maxAngle;
-    // Space bleibt statisch oder bewegt sich nur minimal
-    const spaceAngle = scrollPercent * maxAngle;
+    // Space dreht sich von einer geneigten Position in den Vordergrund
+    const spaceAngle = 60 - (scrollPercent * 60); // Start bei 60° und dreht bis 0°
 
     // Transparenz des Cafés beim Kippen
-    const cafeOpacity = 1 - scrollPercent * 1.0; // Reduziert die Opazität beim Kippen bis es unsichtbar wird
+    const cafeOpacity = 1 - scrollPercent; // Reduziert die Opazität beim Kippen bis es unsichtbar wird
 
     // Auswahl der Layer
     const cafeLayer = document.querySelector('.layer.cafe');
@@ -29,5 +29,5 @@ window.addEventListener('scroll', function() {
     cafeLayer.style.opacity = cafeOpacity;
 
     // Space-Layer bewegt sich minimal, um das Gefühl zu erzeugen, dass es sich nach vorne schiebt
-    spaceLayer.style.transform = `rotateX(${60 - spaceAngle}deg) translateY(${scrollPercent * 90}px)`;
+    spaceLayer.style.transform = `rotateX(${spaceAngle}deg) translateY(${scrollPercent * 90}px)`;
 });
